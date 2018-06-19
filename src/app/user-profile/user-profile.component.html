@@ -19,7 +19,7 @@
       </svg>
     </button>
     <div class="user__head">
-      <img class="user__head__avatar" [attr.src]="avatar" [alt]="">
+      <img class="user__head__avatar" [attr.src]="avatar" [attr.alt]="name" [attr.title]="name">
       <div class="user__head__data">
         <span class="user__head__data__name">
           {{ name }} {{ surname }}
@@ -77,7 +77,7 @@
 
   <div class="comments">
     <div class="comments__head">
-      <a class="hide" (click)="commentsVisibilityToggle()">
+      <a class="hide" (click)="commentsVisibilityToggle()" [attr.title]="'Toggle comments'">
         <ng-container *ngIf="commentsVisible; else elseTemplate">
           Hide
         </ng-container>
@@ -89,7 +89,10 @@
     <div class="comments__body" #commentsBody>
       <ng-container *ngIf=commentsVisible>
         <div class="comment" *ngFor="let comment of comments">
-          <img class="comment__head__avatar" [attr.src]="commentAuthor(comment.authorId).avatar" [alt]="">
+          <img class="comment__head__avatar"
+            [attr.src]="commentAuthor(comment.authorId).avatar"
+            [attr.alt]="commentAuthor(comment.authorId).firstName"
+            [attr.title]="commentAuthor(comment.authorId).firstName">
           <div class="comment__body">
             <div class="comment__head">
               <p class="comment__head__name">

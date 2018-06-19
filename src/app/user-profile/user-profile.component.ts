@@ -132,34 +132,40 @@ export class UserProfileComponent implements OnInit {
   }
 
   get comments() {
+    //  if there are comments returns comments
     if (this._comments) {
       return this._comments;
     }
   }
 
   commentAuthor(id) {
+    // returns author of comment
     return this._dataService.getUser(id);
   }
 
   get commentsLength() {
+    // if there are comments returns comments length
     if (this._comments) {
       return this._comments.length;
     }
   }
 
   get likes() {
+    // likes of user
     if (this._likes) {
       return this._likes.length;
     }
   }
 
-  get followers() { // users that follow this.user
+  get followers() {
+    // users that follow user
     if (this._followers) {
       return this._followers.length;
     }
   }
 
-  get follows() { // what users follows this.user
+  get follows() {
+    // what users follows user
     if (this._following) {
       return this._following.length;
     }
@@ -167,10 +173,12 @@ export class UserProfileComponent implements OnInit {
 
   // actions
   togglePopupShare() {
+    // toggles :boolean of popupShare
     this.popupShare = !this.popupShare;
   }
 
   follow(): void {
+    //  adds/removes logged user id to followers array of this users profile
     if (this.following) {
       this._removeEntry(this._followers, this.loggedInUser);
     } else {
@@ -185,6 +193,7 @@ export class UserProfileComponent implements OnInit {
 
 
   like(): void {
+    // adds/removes logged user id to likes array of this users profile
     if (this.liking) {
       this._removeEntry(this._likes, this.loggedInUser);
     } else {
@@ -198,6 +207,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   private _removeEntry(array: any[], item: any) {
+    // removes entry of arrat by item
     const index = array.indexOf(item);
     if (index > -1) {
       array.splice(index, 1);
@@ -205,11 +215,13 @@ export class UserProfileComponent implements OnInit {
   }
 
   share() {
+    // launches popupshare popup
     this.togglePopupShare();
   }
 
   // // comments
   addOnEnter(event, content: string) {
+    // when enter is pressed adds comment to comments in service
     if (event.keyCode === 13) {
       event.preventDefault();
       this.addComment(content);
@@ -217,6 +229,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   addComment(content) {
+    //  adds comment to comments in service
     if (content) {
       const now = Date.now();
       this._dataService.comments.push(
@@ -230,14 +243,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   clearInput() {
+    // clears 'input' area of add comment
     this.commentInput.nativeElement.innerHTML = '';
   }
 
   private _commentsBodyScrollTop() {
+    // when comment is added scrolls to top to see comment
     this.commentsBody.nativeElement.scrollTop = 0;
   }
 
   private _sortCommentsByTime() {
+    //  sorts comments by time whey where added earliest to latest
     return this._comments.sort((a, b) => {
       const dateA = a.publishDate;
       const dateB = b.publishDate;
@@ -246,10 +262,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   toggleLabel(opacity) {
+    //  toggles 'input' label opacity of add comment
     this.commentInputLabel.nativeElement.style.opacity = opacity;
   }
 
   commentsVisibilityToggle() {
+    //  toggles visibility of comments
     this.commentsVisible = !this.commentsVisible;
   }
 
