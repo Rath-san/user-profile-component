@@ -1,0 +1,365 @@
+// imports
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
+// variables
+//colors
+$primary: #002C71;
+$primary-light: #8298b9;
+$black: #444444;
+$gray: #d5dae3;
+$gray-light: #f3f3f3;
+$gray-lighter: #D9D9D9;
+$gray-dark: #d5dae3;
+$gray-deep: #444444;
+$white: #ffffff;
+$cta: #FFA640;
+$shadow-z1: 0 0 4px 0 rgba(172,
+172,
+172,
+0.50);
+$app-width: 100%;
+$border-radius: 5px;
+
+// breakpoints
+$bp-small: 500px;
+
+
+:host {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  max-width: 500px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+a {
+  color: $cta;
+}
+
+small {
+  color: $primary-light;
+}
+
+// abstracts
+%panel {
+  box-shadow: $shadow-z1;
+  margin-bottom: 15px;
+  border-radius: $border-radius;
+  background-color: $white;
+}
+
+%avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+%btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+%max-width {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// flat
+.like {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  padding: 4px;
+  @extend %btn;
+  outline: none;
+  svg {
+    fill: none;
+    stroke: $gray-lighter;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    stroke-width: 4;
+  }
+  &.active {
+    svg {
+      fill: $primary;
+      stroke: $primary;
+    }
+  }
+}
+
+.follow {
+  width: 100%;
+  background-color: $cta;
+  color: $white;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 15px;
+  border: none;
+  outline: none;
+  height: 46px;
+  border-radius: 23px;
+  letter-spacing: 1px;
+  margin-top: 20px;
+  @media screen and (min-width: $bp-small) {
+    max-width: 135px;
+    margin-top: 0;
+  }
+  &.disabled {
+    background-color: $gray;
+  }
+}
+
+.share {
+  @extend %btn;
+  display: block;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 5px;
+  outline: none;
+  svg {
+    fill: $cta;
+  }
+}
+
+.popup-share {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  margin: auto;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(black, 0.3);
+}
+
+.popup-content {
+  @extend %panel;
+  position: relative;
+  width: 300px;
+  margin: auto;
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.hide {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+// wrapper
+.user-profile {
+  @extend %panel;
+  padding: 48px 20px 10px 20px;
+  margin-top: 10px;
+  position: relative;
+  margin-bottom: 0;
+  @media screen and (min-width: $bp-small) {
+    margin-top: 0;
+  }
+  &__deco {
+    height: 95px;
+    width: 100%;
+    background-color: $primary;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+}
+
+// user
+.user {
+  @extend %panel;
+  @extend %max-width;
+  position: relative;
+  z-index: 1;
+  padding: 15px;
+  margin-top: -10px;
+  // width: 100%;
+  @media screen and (min-width: $bp-small) {
+    padding: 20px;
+  }
+  &__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 35px;
+    @media screen and (min-width: $bp-small) {
+      flex-direction: row;
+      margin-bottom: 20px;
+    }
+    &__avatar {
+      @extend %avatar;
+      width: 70px;
+      height: 70px;
+      margin-top: -63px;
+      margin-bottom: 15px;
+      @media screen and (min-width: $bp-small) {
+        margin: 0;
+        margin-right: 20px;
+      }
+    }
+    &__data {
+      position: relative;
+      text-align: center;
+      display: inline-block;
+      @media screen and (min-width: $bp-small) {
+        text-align: left;
+      }
+      &__name {
+        color: $primary;
+        text-transform: capitalize;
+        font-size: 18px;
+      }
+      &__location {
+        font-size: 12px;
+      }
+    }
+  }
+  &__stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    @media screen and (min-width: $bp-small) {
+      margin-bottom: 10px;
+    }
+    &__stat {
+      display: flex;
+      flex-direction: column;
+      width: 50px;
+      &__count {
+        color: $cta;
+        font-size: 24px;
+      }
+      &__name {
+        color: $primary-light;
+        font-size: 10px;
+      }
+      &__separator {
+        background-color: $gray-light;
+        width: 2px;
+        height: 42px;
+      }
+    }
+  }
+}
+
+// comments
+.comments {
+  @extend %panel;
+  @extend %max-width;
+  padding-right: 5px;
+  font-size: 14px;
+  &__head {
+    text-align: center;
+    margin-right: -5px;
+    padding: 25px 0 25px 0;
+  }
+  &__body {
+    max-height: 440px;
+    overflow-y: auto;
+    margin-bottom: 5px;
+    &::-webkit {
+      &-scrollbar {
+        width: 5px;
+        &-track {
+          background-color: $gray-light;
+          border-radius: 3px;
+        }
+        &-thumb {
+          background-color: $gray-dark;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+  &__footer {
+    border-top: 1px solid $gray-lighter;
+    margin-right: -5px;
+    padding: 15px 35px 20px 30px;
+    .input {
+      &__label {
+        color: $primary-light;
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+      }
+      &__field {
+        border: none;
+        width: 100%;
+      }
+      &__deco {
+        height: 1px;
+        width: 100%;
+        background-color: #DBE0E8;
+        display: block;
+      }
+    }
+  }
+}
+
+.editable {
+  outline: none;
+  display: inline-block;
+  width: 100%;
+  height: 25px;
+}
+
+.comment {
+  border-bottom: 1px solid $gray-lighter;
+  margin-right: 20px;
+  padding: 20px 0 0 20px;
+  display: flex;
+  @media screen and (min-width: $bp-small) {
+    margin-right: 10px;
+  }
+  &:first-child {
+    padding-top: 5px;
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+  &__head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: -10px;
+    &__avatar {
+      @extend %avatar;
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      margin-right: 10px;
+    }
+    &__name {
+      color: $primary;
+      margin-top: 10px;
+      margin-bottom: 12px;
+    }
+    &__publish-date {
+      color: $primary-light;
+    }
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &__content {
+      line-height: 1.5;
+      margin-top: 0;
+      color: $gray-deep;
+      @media screen and (min-width: $bp-small) {
+        max-width: 335px;
+      }
+    }
+  }
+}

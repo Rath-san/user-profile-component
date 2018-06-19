@@ -1,0 +1,127 @@
+<div class="user-profile">
+  <div class="user">
+    <button class="share" (click)="share()" [title]="'Share'">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="12" viewBox="0 0 30 27.7">
+        <g transform="matrix(1,0,0,-1,75.932203,1391.7288)">
+          <path d="M-50.5,1373.9v-4.7c0-1.4-0.5-2.7-1.5-3.7
+      		c-1-1-2.2-1.5-3.7-1.5h-15c-1.4,0-2.7,0.5-3.7,1.5s-1.5,2.2-1.5,3.7v15c0,1.4,0.5,2.7,1.5,3.7s2.2,1.5,3.7,1.5h4.6l0,0
+      		c0.2,0,0.3-0.1,0.4-0.2c0.1-0.1,0.2-0.2,0.2-0.4c0-0.3-0.2-0.5-0.5-0.6c-0.9-0.3-1.7-0.7-2.4-1.1c-0.1,0-0.2-0.1-0.3-0.1h-2
+      		c-0.8,0-1.5-0.3-2-0.8c-0.6-0.6-0.8-1.2-0.8-2v-15c0-0.8,0.3-1.5,0.8-2c0.6-0.6,1.2-0.8,2-0.8h15c0.8,0,1.5,0.3,2,0.8
+      		c0.6,0.6,0.8,1.2,0.8,2v3.9c0,0.2,0.1,0.4,0.3,0.5c0.3,0.2,0.7,0.4,1,0.7c0.2,0.2,0.4,0.2,0.6,0.1
+      		C-50.7,1374.3-50.5,1374.1-50.5,1373.9z M-46.3,1382.8l-6.9-6.9c-0.2-0.2-0.5-0.3-0.8-0.3c-0.1,0-0.3,0-0.5,0.1
+      		c-0.5,0.2-0.7,0.6-0.7,1.1v3.5H-58c-3.9,0-6.5-0.8-7.9-2.4c-1.4-1.6-1.9-4.5-1.3-8.5c0-0.3-0.1-0.5-0.4-0.6c-0.1,0-0.2,0-0.2,0
+      		c-0.2,0-0.3,0.1-0.5,0.2c-0.1,0.2-0.2,0.4-0.4,0.6s-0.4,0.6-0.7,1.2c-0.3,0.6-0.6,1.2-0.9,1.8c-0.3,0.6-0.5,1.3-0.7,2.1
+      		c-0.2,0.8-0.3,1.5-0.3,2.2c0,0.6,0,1.1,0.1,1.6c0,0.5,0.1,1,0.3,1.6c0.1,0.6,0.3,1.1,0.5,1.6c0.2,0.5,0.5,1,0.8,1.5
+      		c0.4,0.5,0.8,0.9,1.2,1.3s1,0.8,1.7,1.1c0.7,0.3,1.4,0.6,2.2,0.9c0.8,0.2,1.8,0.4,2.9,0.5c1.1,0.1,2.3,0.2,3.5,0.2h2.9v3.5
+      		c0,0.5,0.2,0.9,0.7,1.1c0.2,0.1,0.3,0.1,0.5,0.1c0.3,0,0.6-0.1,0.8-0.3l6.9-6.9c0.2-0.2,0.3-0.5,0.3-0.8S-46,1383.1-46.3,1382.8z"
+          />
+        </g>
+      </svg>
+    </button>
+    <div class="user__head">
+      <img class="user__head__avatar" [attr.src]="avatar" [alt]="">
+      <div class="user__head__data">
+        <span class="user__head__data__name">
+          {{ name }} {{ surname }}
+        </span>
+        <br>
+        <small class="user__head__data__location">
+          {{ location }}
+        </small>
+        <button class="like active" [ngClass]="{'active': liking}" (click)="like()" [title]="liking ? 'Dislike':'Like'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12px" preserveAspectRatio="xMidYMid meet" viewBox="-2 -2 36 33" xml:space="preserve">
+            <path d="M15.6,28.1l12.5-12.5c3.5-3.5,3.5-9,0-12.5c-3.5-3.5-9-3.5-12.5,0c-3.5-3.5-9-3.5-12.5,0c-3.5,3.5-3.5,9,0,12.5L15.6,28.1z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="user__stats">
+      <div class="user__stats__stat">
+        <span class="user__stats__stat__count">
+          {{ likes }}
+        </span>
+        <span class="user__stats__stat__name">
+          Likes
+        </span>
+      </div>
+      <span class="user__stats__stat__separator"></span>
+      <div class="user__stats__stat">
+        <span class="user__stats__stat__count">
+          {{ follows }}
+        </span>
+        <span class="user__stats__stat__name">
+          Following
+        </span>
+      </div>
+      <span class="user__stats__stat__separator"></span>
+      <div class="user__stats__stat">
+        <span class="user__stats__stat__count">
+          {{ followers }}
+        </span>
+        <span class="user__stats__stat__name">
+          Followers
+        </span>
+      </div>
+      <button class="follow" [ngClass]="{'disabled': following}" (click)="follow()" [title]="following ? 'Stop following': 'Follow'">
+        <ng-container *ngIf="following; else followTemplate">
+          following
+        </ng-container>
+        <ng-template #followTemplate>
+          follow
+        </ng-template>
+
+      </button>
+    </div>
+  </div>
+
+  <div class="comments">
+    <div class="comments__head">
+      <a class="hide" (click)="commentsVisibilityToggle()">
+        <ng-container *ngIf="commentsVisible; else elseTemplate">
+          Hide
+        </ng-container>
+        <ng-template #elseTemplate>
+          Show
+        </ng-template>
+        comments ({{commentsLength}})</a>
+    </div>
+    <div class="comments__body" #commentsBody>
+      <ng-container *ngIf=commentsVisible>
+        <div class="comment" *ngFor="let comment of comments">
+          <img class="comment__head__avatar" [attr.src]="commentAuthor(comment.authorId).avatar" [alt]="">
+          <div class="comment__body">
+            <div class="comment__head">
+              <p class="comment__head__name">
+                {{commentAuthor(comment.authorId).firstName}} {{commentAuthor(comment.authorId).lastName}}
+              </p>
+              <p class="comment__head__publish-date">
+                {{ comment.publishDate | dateSpread }}
+              </p>
+            </div>
+            <p class="comment__body__content">
+              {{ comment.content }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="comments__footer" *ngIf=commentsVisible>
+      <div class="input">
+        <label #commentInputLabel class="input__label" for="commentsInput">Add a comment</label>
+        <div class="editable" contenteditable="true" #commentInput (focus)="toggleLabel(0)" (blur)="toggleLabel(1)" (keydown)="addOnEnter($event, commentInput.textContent)"></div>
+        <span class="input__deco"></span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="popupShare" class="popup-share">
+    <div class="popup-content">
+      <button class="share" (click)="share()" [title]="'Close'">close</button>
+      <div class="popup-content__head">
+        {{ webpageUrl }}
+      </div>
+    </div>
+  </div>
+  <div class="user-profile__deco"></div>
+</div>
